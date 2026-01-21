@@ -124,7 +124,13 @@ func (p *PeriodicCertChecker) getMatches() []string {
 			match = excludeGlob.Join(match)
 			delete(set, match)
 		}
+
+		if len(set) == 0 {
+			slog.Info("No certificate files matched the provided globs")
+		}
 	}
+
+	metrics.Discovered.Set(float64(len(set)))
 
 	res := make([]string, len(set))
 	i := 0

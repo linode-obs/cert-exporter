@@ -16,6 +16,15 @@ var (
 		},
 	)
 
+	// Discovered is a prometheus guage that indicates the sum of discovered certificates after taking into account include and exclude globs
+	Discovered = prometheus.NewGauge(
+		prometheus.GaugeOpts{
+			Namespace: namespace,
+			Name:      "discovered",
+			Help:      "Cert Exporter Discovered Certificates",
+		},
+	)
+
 	// CertExpirySeconds is a prometheus gauge that indicates the number of seconds until certificates on disk expires.
 	CertExpirySeconds = prometheus.NewGaugeVec(
 		prometheus.GaugeOpts{
@@ -95,7 +104,7 @@ var (
 		},
 		[]string{"key_name", "issuer", "cn", "secret_name", "secret_namespace"},
 	)
-	
+
 	// SecretNotBeforeTimestamp is a prometheus gauge that indicates the NotBefore timestamp.
 	SecretNotBeforeTimestamp = prometheus.NewGaugeVec(
 		prometheus.GaugeOpts{
@@ -125,7 +134,7 @@ var (
 		},
 		[]string{"issuer", "cn", "cert_request", "certrequest_namespace"},
 	)
-	
+
 	// CertRequestNotBeforeTimestamp is a prometheus gauge that indicates the NotBefore timestamp.
 	CertRequestNotBeforeTimestamp = prometheus.NewGaugeVec(
 		prometheus.GaugeOpts{
@@ -165,7 +174,7 @@ var (
 		},
 		[]string{"key_name", "issuer", "cn", "configmap_name", "configmap_namespace"},
 	)
-	
+
 	// ConfigMapNotBeforeTimestamp is a prometheus gauge that indicates the NotBefore timestamp.
 	ConfigMapNotBeforeTimestamp = prometheus.NewGaugeVec(
 		prometheus.GaugeOpts{
@@ -195,7 +204,7 @@ var (
 		},
 		[]string{"type_name", "issuer", "cn", "webhook_name", "admission_review_version_name"},
 	)
-	
+
 	// WebhookNotBeforeTimestamp is a prometheus gauge that indicates the NotBefore timestamp.
 	WebhookNotBeforeTimestamp = prometheus.NewGaugeVec(
 		prometheus.GaugeOpts{
@@ -221,6 +230,7 @@ func Init(prometheusExporterMetricsDisabled bool, registry *prometheus.Registry)
 		registerer = prometheus.DefaultRegisterer
 	}
 
+	registerer.MustRegister(Discovered)
 	registerer.MustRegister(ErrorTotal)
 	registerer.MustRegister(CertExpirySeconds)
 	registerer.MustRegister(CertNotAfterTimestamp)

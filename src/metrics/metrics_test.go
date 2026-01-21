@@ -85,26 +85,27 @@ func TestMetricsNamespace(t *testing.T) {
 func TestMetricsDefinitions(t *testing.T) {
 	// Test that all metric variables are defined and not nil
 	metrics := map[string]interface{}{
-		"ErrorTotal":                      ErrorTotal,
-		"CertExpirySeconds":               CertExpirySeconds,
-		"CertNotAfterTimestamp":           CertNotAfterTimestamp,
-		"CertNotBeforeTimestamp":          CertNotBeforeTimestamp,
-		"KubeConfigExpirySeconds":         KubeConfigExpirySeconds,
-		"KubeConfigNotAfterTimestamp":     KubeConfigNotAfterTimestamp,
-		"KubeConfigNotBeforeTimestamp":    KubeConfigNotBeforeTimestamp,
-		"SecretExpirySeconds":             SecretExpirySeconds,
-		"SecretNotAfterTimestamp":         SecretNotAfterTimestamp,
-		"SecretNotBeforeTimestamp":        SecretNotBeforeTimestamp,
-		"CertRequestExpirySeconds":        CertRequestExpirySeconds,
-		"CertRequestNotAfterTimestamp":    CertRequestNotAfterTimestamp,
-		"CertRequestNotBeforeTimestamp":   CertRequestNotBeforeTimestamp,
-		"AwsCertExpirySeconds":            AwsCertExpirySeconds,
-		"ConfigMapExpirySeconds":          ConfigMapExpirySeconds,
-		"ConfigMapNotAfterTimestamp":      ConfigMapNotAfterTimestamp,
-		"ConfigMapNotBeforeTimestamp":     ConfigMapNotBeforeTimestamp,
-		"WebhookExpirySeconds":            WebhookExpirySeconds,
-		"WebhookNotAfterTimestamp":        WebhookNotAfterTimestamp,
-		"WebhookNotBeforeTimestamp":       WebhookNotBeforeTimestamp,
+		"Discovered":                    Discovered,
+		"ErrorTotal":                    ErrorTotal,
+		"CertExpirySeconds":             CertExpirySeconds,
+		"CertNotAfterTimestamp":         CertNotAfterTimestamp,
+		"CertNotBeforeTimestamp":        CertNotBeforeTimestamp,
+		"KubeConfigExpirySeconds":       KubeConfigExpirySeconds,
+		"KubeConfigNotAfterTimestamp":   KubeConfigNotAfterTimestamp,
+		"KubeConfigNotBeforeTimestamp":  KubeConfigNotBeforeTimestamp,
+		"SecretExpirySeconds":           SecretExpirySeconds,
+		"SecretNotAfterTimestamp":       SecretNotAfterTimestamp,
+		"SecretNotBeforeTimestamp":      SecretNotBeforeTimestamp,
+		"CertRequestExpirySeconds":      CertRequestExpirySeconds,
+		"CertRequestNotAfterTimestamp":  CertRequestNotAfterTimestamp,
+		"CertRequestNotBeforeTimestamp": CertRequestNotBeforeTimestamp,
+		"AwsCertExpirySeconds":          AwsCertExpirySeconds,
+		"ConfigMapExpirySeconds":        ConfigMapExpirySeconds,
+		"ConfigMapNotAfterTimestamp":    ConfigMapNotAfterTimestamp,
+		"ConfigMapNotBeforeTimestamp":   ConfigMapNotBeforeTimestamp,
+		"WebhookExpirySeconds":          WebhookExpirySeconds,
+		"WebhookNotAfterTimestamp":      WebhookNotAfterTimestamp,
+		"WebhookNotBeforeTimestamp":     WebhookNotBeforeTimestamp,
 	}
 
 	for name, metric := range metrics {
@@ -216,11 +217,11 @@ func TestKubeConfigNotBeforeTimestampLabels(t *testing.T) {
 
 func TestSecretExpirySecondsLabels(t *testing.T) {
 	labels := prometheus.Labels{
-		"key_name":          "tls.crt",
-		"issuer":            "Test CA",
-		"cn":                "test.example.com",
-		"secret_name":       "test-secret",
-		"secret_namespace":  "default",
+		"key_name":         "tls.crt",
+		"issuer":           "Test CA",
+		"cn":               "test.example.com",
+		"secret_name":      "test-secret",
+		"secret_namespace": "default",
 	}
 
 	gauge := SecretExpirySeconds.With(labels)
@@ -232,11 +233,11 @@ func TestSecretExpirySecondsLabels(t *testing.T) {
 
 func TestSecretNotAfterTimestampLabels(t *testing.T) {
 	labels := prometheus.Labels{
-		"key_name":          "tls.crt",
-		"issuer":            "Test CA",
-		"cn":                "test.example.com",
-		"secret_name":       "test-secret",
-		"secret_namespace":  "default",
+		"key_name":         "tls.crt",
+		"issuer":           "Test CA",
+		"cn":               "test.example.com",
+		"secret_name":      "test-secret",
+		"secret_namespace": "default",
 	}
 
 	gauge := SecretNotAfterTimestamp.With(labels)
@@ -248,11 +249,11 @@ func TestSecretNotAfterTimestampLabels(t *testing.T) {
 
 func TestSecretNotBeforeTimestampLabels(t *testing.T) {
 	labels := prometheus.Labels{
-		"key_name":          "tls.crt",
-		"issuer":            "Test CA",
-		"cn":                "test.example.com",
-		"secret_name":       "test-secret",
-		"secret_namespace":  "default",
+		"key_name":         "tls.crt",
+		"issuer":           "Test CA",
+		"cn":               "test.example.com",
+		"secret_name":      "test-secret",
+		"secret_namespace": "default",
 	}
 
 	gauge := SecretNotBeforeTimestamp.With(labels)
@@ -264,10 +265,10 @@ func TestSecretNotBeforeTimestampLabels(t *testing.T) {
 
 func TestCertRequestExpirySecondsLabels(t *testing.T) {
 	labels := prometheus.Labels{
-		"issuer":                 "letsencrypt",
-		"cn":                     "test.example.com",
-		"cert_request":           "test-cert-request",
-		"certrequest_namespace":  "cert-manager",
+		"issuer":                "letsencrypt",
+		"cn":                    "test.example.com",
+		"cert_request":          "test-cert-request",
+		"certrequest_namespace": "cert-manager",
 	}
 
 	gauge := CertRequestExpirySeconds.With(labels)
@@ -279,10 +280,10 @@ func TestCertRequestExpirySecondsLabels(t *testing.T) {
 
 func TestCertRequestNotAfterTimestampLabels(t *testing.T) {
 	labels := prometheus.Labels{
-		"issuer":                 "letsencrypt",
-		"cn":                     "test.example.com",
-		"cert_request":           "test-cert-request",
-		"certrequest_namespace":  "cert-manager",
+		"issuer":                "letsencrypt",
+		"cn":                    "test.example.com",
+		"cert_request":          "test-cert-request",
+		"certrequest_namespace": "cert-manager",
 	}
 
 	gauge := CertRequestNotAfterTimestamp.With(labels)
@@ -294,10 +295,10 @@ func TestCertRequestNotAfterTimestampLabels(t *testing.T) {
 
 func TestCertRequestNotBeforeTimestampLabels(t *testing.T) {
 	labels := prometheus.Labels{
-		"issuer":                 "letsencrypt",
-		"cn":                     "test.example.com",
-		"cert_request":           "test-cert-request",
-		"certrequest_namespace":  "cert-manager",
+		"issuer":                "letsencrypt",
+		"cn":                    "test.example.com",
+		"cert_request":          "test-cert-request",
+		"certrequest_namespace": "cert-manager",
 	}
 
 	gauge := CertRequestNotBeforeTimestamp.With(labels)
@@ -424,4 +425,15 @@ func TestErrorTotalCounter(t *testing.T) {
 	// Note: We can't easily verify the actual value due to global state,
 	// but we can verify it doesn't panic
 	ErrorTotal.Inc()
+}
+
+func TestDiscoveredGauge(t *testing.T) {
+	// Test that Discovered gauge can be set and updated
+	// Note: We can't easily verify the actual value due to global state,
+	// but we can verify it doesn't panic
+	Discovered.Set(10)
+	Discovered.Inc()
+	Discovered.Dec()
+	Discovered.Add(5)
+	Discovered.Sub(3)
 }
